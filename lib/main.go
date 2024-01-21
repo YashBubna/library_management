@@ -1,7 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"log"
+	"net/http"
+
+	"github.com/YashBubna/library_management/pkg/routes"
+	"github.com/gorilla/mux"
+)
 
 func main() {
-	fmt.Println("hello ")
+	r := mux.NewRouter()
+	routes.RegisterBookStoreRoutes(r)
+	http.Handle("/", r)
+	log.Fatal(http.ListenAndServe("localhost:8080", r))
 }
